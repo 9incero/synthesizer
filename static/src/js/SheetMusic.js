@@ -3,6 +3,8 @@ import { piano_player, beat_player, dialInitialize, beat_output_play} from './Sy
 import * as Midi from "./jsmidgen.js"
 //import * as JZZ from "./JZZ.js"
 
+
+
 //최소 범위 A2 ~ C7
 
 let nowClicked;
@@ -125,6 +127,8 @@ document.getElementById('sizeSaveButton').addEventListener("click", function(){
 document.getElementById('velocitySaveButton').addEventListener("click", function(){
   velocityFeature = document.getElementById("velocityID").value;
 });
+
+
 
 function saveMood(){
   let MoodDataObject = {
@@ -2128,10 +2132,85 @@ function loadLyrics(jsonObject){
 /*------------------------------------------laod MIDI Code -------------------------------------------- */
 document.getElementById("sheetMusicLoadButton").addEventListener('click', function (){
   FileInput.click();
+
 })
 document.getElementById("MoodLoadButtonMood").addEventListener('click', function (){
   FileInput.click();
 })
+
+function loadMidiFile(midiFilePath) {
+  // MIDI 파일을 로드하고 처리하는 코드 추가
+  console.log('Loading MIDI file:', midiFilePath);
+
+  // 예시: MIDI 파일을 어떻게 처리할지에 대한 코드
+}
+
+// AJAX를 사용하여 서버로부터 MIDI 파일 내용 가져오기
+function fetchMidiContent() {
+  fetch('/get_midi_data')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+      })
+      .then(data => {
+        if (data.error) {
+          console.error('Error:', data.error);
+      } else {
+          // base64 디코딩
+          const decodedData = atob(data.midi_content);
+
+          // Uint8Array로 변환
+          const uint8Array = new Uint8Array(decodedData.length);
+          for (let i = 0; i < decodedData.length; i++) {
+              uint8Array[i] = decodedData.charCodeAt(i);
+          }
+
+          // MIDI 데이터를 사용하여 원하는 동작 수행
+          console.log('Handling MIDI Content:', uint8Array);
+
+          // MIDI 데이터를 JZZ.MIDI.SMF로 변환
+          const smf = new JZZ.MIDI.SMF(uint8Array.buffer);
+
+          // getMididata 함수 호출
+          getMididata(smf[0]);
+      }
+      })
+      .catch(error => {
+          console.error('Fetch error:', error);
+      });
+}
+
+
+// 여기
+document.getElementById("test_load").addEventListener('click', function (){
+
+    // fetch('/dd', { headers: { 'Accept': 'text/plain' }})
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! Status: ${response.status}`);
+    //         }
+    //         return response.text();
+    //     })
+    //     .then(midiFilePath  => {
+    //         // 여기에서 /shape 엔드포인트의 응답을 처리
+    //         window.location.href = `/data?midi_file=${encodeURIComponent(midiFilePath)}`;
+
+    //         console.log(midiFilePath);
+    //         console.log('dd')
+    //         console.log()
+    //     })
+    //     .catch(error => {
+    //         console.error('Fetch error:', error);
+    //     });
+
+// 페이지 로드 시 MIDI 파일 내용 가져오기
+  fetchMidiContent();
+
+
+})
+
 FileInput.addEventListener('change', function(e){
   // const Files = e.target.files;
   // for(let file of Files){
@@ -2161,6 +2240,7 @@ FileInput.addEventListener('change', function(e){
   //     }
   //   };
   //   reader.readAsText(file);
+
   const Files = e.target.files;
   for(let file of Files){
     console.log("Current Upload FIle Data");
@@ -2185,6 +2265,7 @@ FileInput.addEventListener('change', function(e){
         alert("무드로 불러올 수 있는 데이터는 Json 파일만 가능합니다.")
       }
     }
+    // midi file업로드!!!!
     if(current_clip_type == MusicClipType.Melody || current_clip_type == MusicClipType.Beat){
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -2271,7 +2352,7 @@ function loadWebmFile(file) {
 }
 
 
-
+// 여기!!!!!!!!!!!!!!!
 let OverMidiDataChecker = false;
 function clipDurationNormalize(type){
   if(type == MusicClipType.Melody){

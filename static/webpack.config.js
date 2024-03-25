@@ -16,7 +16,8 @@ module.exports = {
         vantavisual: path.resolve(__dirname, "src", "js", "vantavisual.js"),
         vantaassistive: path.resolve(__dirname, "src", "js", "vantaassistive.js"),
         ui: path.resolve(__dirname, "src", "js", "ui.js"),
-        sign: path.resolve(__dirname, "src", "js", "sign.js")
+        sign: path.resolve(__dirname, "src", "js", "sign.js"),
+        transcribe: path.resolve(__dirname, "src", "js", "transcribe.js")
     },
     mode: "development",
     target: "web",

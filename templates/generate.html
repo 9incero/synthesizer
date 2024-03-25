@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>음악 작곡 하기</title>
+    <link type="text/css" href="../static/src/css/buttons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/src/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/src/css/bootstrap.min.css">
+    <link type="text/css" href="../static/src/css/login.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.2"></script>
+    <script src="../static/src/js/transcribe.js" defer></script>
+  </head>
+
+  <body>
+      <div class="form">
+          <p> 만들고 싶은 음악에 대한 설명 <br> (가사, 분위기 등) </p>
+          <form id="musicForm" action="/generate" method="POST">
+              <input type="text" name="title" placeholder="노래 제목"/>
+              <div style="width:100%; height:120px; overflow:auto; border:1px solid #ccc; background-color:#f2f2f2; padding:10px;margin-bottom: 20px;">
+                  <textarea type="text" name="music_description" placeholder="노래 묘사" style="width:380px; height:100px;resize: none; font-size:20px;"></textarea>
+              </div>
+            <div>               <!-- 악기 선택 -->
+                  <select name="instrument" style="width: 100%; height: 40px; background-color: #f2f2f2; margin-bottom: 20px;">
+                    <option value="">악기</option>
+                    <option value="piano">피아노</option>
+                    <option value="guitar">기타</option>
+                    <option value="flute">플루트</option>
+                    <option value="violin">바이올린</option>
+                  </select>
+                   <!-- #장르 선택 -->
+                  <br>
+                  <select name="genre" style="width: 100%; height: 40px; background-color: #f2f2f2; margin-bottom: 20px; ">
+                     <option value="">장르</option>
+                     <option value="hip-pop">힙합</option>
+                     <option value="classical_music">클래식</option>
+                     <option value="blues">블루스</option>
+                     <option value="new-age_music">뉴에이지</option>
+                     <option value="jazz">재즈</option>
+                     <option value="folk">포크</option>
+                     <option value="K-pop">K-pop</option>
+
+                  </select>
+                  <br>
+                  <!-- #장단조 선택 -->
+                <select name="tonality" style="width: 100%; height: 40px; background-color: #f2f2f2; margin-bottom: 20px; ">
+                  <option value="">장단조(밝은/어두운)</option>
+                  <option value="major">장조(밝은)</option>
+                  <option value="minor">단조(어두운)</option>
+                </select>
+                <!-- #템포 선택 -->
+                <select name="tempo" style="width: 100%; height: 40px; background-color: #f2f2f2;margin-bottom: 20px;">
+                  <option value="">템포</option>
+                  <option value="Allegro">빠르게(allegro)</option>
+                  <option value="Andante">보통(andante)</option>
+                  <option value="Adagio">느리게(adagio)</option>
+                </select>
+                <!-- 음악 길이 -->
+                <input
+                  type="number"
+                  min="1"
+                  name="duration"
+                  placeholder="노래 길이"
+                  oninput="validateNumberInput(this)"
+                />
+                <button class="submit" style="margin-bottom: 40px;">생성하기</button>
+                <br>
+                <script>
+                  // duration 양수만 가능하게
+                  function validateNumberInput(input) {
+                    let inputValue = input.value;
+                    inputValue = inputValue.replace(/[+\-]/g, "");
+                    input.value = inputValue;
+                  }
+                </script>
+          </div>
+          </form>
+
+      <div id="output" hidden>
+        <div>
+          <!-- 오디오  -->
+          <audio controls>
+            <source src="{{ temp_filepath }}" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div class="box" >
+          <div class="top">
+            <div id="modelLoading">
+              <span>Loading model...</span>
+            </div>
+
+            <div id="modelReady" hidden>
+              <div id="buttons">
+                <label class="button" id="btnUpload" disabled> </label>
+                <button id="wav_input">사용</button>
+              </div>
+            </div>
+            <div class="middle">
+                  <div id="players" hidden>
+                  </div>
+                    
+            <div class="container" id="container" hidden>
+              <canvas id="canvas"></canvas>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- midi file 저장 -->
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"
+          defer
+        ></script>
+      </div>
+
+      <!-- Flask에서 받은 temp_filepath 값으로 output div를 표시하거나 숨깁니다. -->
+      {% if temp_filepath %}
+      <script>
+          document.getElementById('output').removeAttribute('hidden');
+      </script>
+      {% else %}
+      <script>
+          document.getElementById('output').setAttribute('hidden', 'true');
+      </script>
+      {% endif %}
+      
+    </div>
+     </div>
+
+  </body>
+</html>
