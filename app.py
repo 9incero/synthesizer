@@ -3,20 +3,20 @@ import os
 import base64
 import replicate
 import deepl
-import sys
-import librosa
-import pandas as pd
 import requests 
-import urllib.parse
 import json
+from gradio_client import Client
+import re
+import torch
+from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
 
-# SECURITY WARNING: keep the secret key used in production secret!
+
 with open('./apiKey.json') as f:
     secrets = json.loads(f.read())
 
 os.environ["REPLICATE_API_TOKEN"]=secrets["REPLICATE_API_TOKEN"]
 auth_key=secrets["DEEPL_API_TOKEN"]
-
+# hugging_key=secrets['HUGGING_API_TOKEN']
 
 app = Flask(__name__)
 app.secret_key = 'dvsdsfsdfvvdseg'  # 세션 암호화를 위한 키 
@@ -61,6 +61,46 @@ def generate():
         music_description = request.form.get('music_description')
         # print('음악 설명', music_description)  # Debug print
         
+        # #image to caption
+        # file = request.files['image']
+    
+        # if file.filename == '':
+        #     return 'No selected file'
+        
+
+        # upload_folder = './static/src/input/'   # 업로드 폴더 경로 설정
+        # file.save(os.path.join(upload_folder, file.filename))
+
+        # img=upload_folder+file.filename
+
+        # kosmos2_client = Client("https://ydshieh-kosmos-2.hf.space/")
+        # kosmos2_result = kosmos2_client.predict(
+        #     img,	
+        #     "Detailed",
+        #     fn_index=4
+        # )
+
+        # with open(kosmos2_result[1], 'r') as f:
+        #     data = json.load(f)
+        
+        # reconstructed_sentence = []
+        # for sublist in data:
+        #     reconstructed_sentence.append(sublist[0])
+
+        # full_sentence = ' '.join(reconstructed_sentence)
+        # #print(full_sentence)
+
+        # pattern = r'^Describe this image in detail:\s*(.*)$'
+        # match = re.search(pattern, full_sentence)
+        # if match:
+        #     description = match.group(1)
+        #     print(description)
+        # else:
+        #     print("Unable to locate valid description.")
+
+        #caption to LLM
+
+        
         #번역
         translator = deepl.Translator(auth_key)
         trans=translator.translate_text(music_description, target_lang="EN-US")
@@ -91,21 +131,24 @@ def generate():
             "model_version": "melody-large",
             #"prompt":music_description+', solo '+instrument+' recording'+', genre is '+genre+', '+tonality+', '+tempo,
             "prompt": 'music description:'+ music_description+', instrument: solo '+instrument+', music genre: '+genre+', music atmosphere: '+tonality+', music tempo: '+tempo,
+            "output_format": "mp3",
             # #input_audio는 웹uri형식만
             # "input_audio":'https://file.notion.so/f/f/e0a10e20-9745-4b98-87b5-ae4991a9b690/02d9d877-595c-4835-b557-fdd2c1fe9bc5/fast.wav?id=7dc740e1-5d09-4d21-8374-71188d1ce802&table=block&spaceId=e0a10e20-9745-4b98-87b5-ae4991a9b690&expirationTimestamp=1709272800000&signature=Y8_BR9y8a25-u3ZaWWT_TVMEt7K8DI1Bdt99odlqeoc&downloadName=fast.wav',
             # #true 사용 불가
             # "continuation":False,
             "duration":duration,
+            
+
 
             }
         )
         print(output)
 
-        #wav file save
-        wav_url = output
-        filename = title+'.wav'
+        #mp3 file save
+        mp3_url = output
+        filename = title+'.mp3'
 
-        response = requests.get(wav_url, stream=True)
+        response = requests.get(mp3_url, stream=True)
         
         if response.status_code == 200:
             temp_filepath = './static/src/input/' + filename
@@ -113,7 +156,7 @@ def generate():
                 for chunk in response.iter_content(chunk_size=1024):
                     file.write(chunk)
 
-            mimetype = 'audio/wav'
+            mimetype = 'audio/mpeg'
 
             send_file(
                 temp_filepath,
@@ -123,21 +166,17 @@ def generate():
             )
 
             print(temp_filepath,' 저장 완료')
-            session['wav_file'] = temp_filepath
+            session['mp3_file'] = temp_filepath
         return render_template('generate.html', instrument=instrument, genre=genre, tonality=tonality, tempo=tempo, duration=duration, title=title, music_description=music_description, temp_filepath=temp_filepath)
 
     return render_template('generate.html')
 
-@app.route('/get_wav_data', methods=['GET'])
-def get_wav_data():
-    wav_file_path = session.get('wav_file', None)
-    return send_file(wav_file_path, as_attachment=True)
+@app.route('/get_mp3_data', methods=['GET'])
+def get_mp3_data():
+    mp3_file_path = session.get('mp3_file', None)
+    print(mp3_file_path)
+    return send_file(mp3_file_path, as_attachment=True)
 
-@app.route('/test', methods=['POST', 'GET'])
-def test():
-    title = request.args.get('title', 'Default Title')
-    output = str(request.args.get('output', 'no contents'))
-    return render_template('test.html',title=title,output=output)
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -162,25 +201,37 @@ def upload():
         return midi_file_path
 
 @app.route('/get_midi_data')
+# def get_midi_data():
+#     # 세션에서 파일 정보 가져오기
+#     midi_file_path = session.get('midi_file', None)
+#     print(midi_file_path)
+#     if midi_file_path:
+#         try:
+#             with open(midi_file_path, 'rb') as midi_file:
+#                 # MIDI 파일 내용 읽기
+#                 midi_content = midi_file.read()
+
+#                 # 바이너리 데이터를 base64로 인코딩하여 전달
+#                 midi_content_base64 = base64.b64encode(midi_content).decode('utf-8')
+#                 return jsonify({'midi_content': midi_content_base64})
+#         except Exception as e:
+#             print('Error opening MIDI file:', e)
+#             return jsonify({'error': 'Error opening MIDI file'})
+#     else:
+#         return jsonify({'error': 'MIDI file not found'}), 404
+@app.route('/get_midi_data')
 def get_midi_data():
     # 세션에서 파일 정보 가져오기
     midi_file_path = session.get('midi_file', None)
     print(midi_file_path)
     if midi_file_path:
         try:
-            with open(midi_file_path, 'rb') as midi_file:
-                # MIDI 파일 내용 읽기
-                midi_content = midi_file.read()
-
-                # 바이너리 데이터를 base64로 인코딩하여 전달
-                midi_content_base64 = base64.b64encode(midi_content).decode('utf-8')
-                return jsonify({'midi_content': midi_content_base64})
+            return send_file(midi_file_path, as_attachment=True)
         except Exception as e:
             print('Error opening MIDI file:', e)
             return jsonify({'error': 'Error opening MIDI file'})
     else:
         return jsonify({'error': 'MIDI file not found'}), 404
-
 
 
 if __name__ == '__main__':

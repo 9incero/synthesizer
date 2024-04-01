@@ -7,10 +7,9 @@ const PLAYERS = {};
 const model = initModel();
 let player = initPlayers();
 
-// wav파일 불러오기
-document.getElementById("wav_input").addEventListener("click", function () {
-  console.log("wav");
-  fetch("/get_wav_data")
+// mp3파일 불러오기
+document.getElementById("mp3_input").addEventListener("click", function () {
+  fetch("/get_mp3_data")
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -30,7 +29,7 @@ document.getElementById("wav_input").addEventListener("click", function () {
     });
 });
 
-// wav to midi
+// mp3 to midi
 async function transcribeFromFile(blob) {
   try {
     const ns = await model.transcribeFromAudioFile(blob);
@@ -104,4 +103,21 @@ function initModel() {
     buttons.hidden = true;
   }
   return model;
+}
+
+function loadFile(input) {
+  let file = input.files[0]; // 선택파일 가져오기
+
+  let newImage = document.createElement("img"); //새 이미지 태그 생성
+
+  //이미지 source 가져오기
+  newImage.src = URL.createObjectURL(file);
+  newImage.style.width = "100%"; //div에 꽉차게 넣으려고
+  newImage.style.height = "100%";
+  newImage.style.objectFit = "cover"; // div에 넘치지 않고 들어가게
+
+  //이미지를 image-show div에 추가
+  let container = document.getElementById("image-show");
+  container.innerHTML = ""; // 기존 내용 삭제
+  container.appendChild(newImage);
 }
