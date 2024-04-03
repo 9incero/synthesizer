@@ -7,8 +7,8 @@ import requests
 import json
 from gradio_client import Client
 import re
-import torch
-from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
+# import torch
+# from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
 
 
 with open('./apiKey.json') as f:
