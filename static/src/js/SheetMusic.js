@@ -105,6 +105,8 @@ createVerticalGrid(
 document.getElementById("beatSelect").style.fontSize = "21px";
 document.getElementById("beatSelect").style.marginTop = "-10px";
 
+let flag = 0;
+let storedMidiData = {};
 //---------------------------무드 데이터 수집용-------------------------//
 
 const MoodList = ["blur", "cloud", "fog", "halo", "cells", "none"];
@@ -223,7 +225,7 @@ function loadMood(jsonObject) {
 document
   .getElementById("PreviousButton")
   .addEventListener("click", function () {
-    console.log("previous check");
+    console.log("previous check", current_clip_type);
     stopRecording();
     stopAllNotePlayer();
     play_state = false;
@@ -235,6 +237,11 @@ document
     } else if (current_clip_type == MusicClipType.Melody) {
       beatTypeSceneChanger();
       clearNoteClip(MusicClipType.Beat);
+      if (flag == 1) {
+        current_clip_type = MusicClipType.Beat;
+        const smf = new JZZ.MIDI.SMF(storedMidiData);
+        getMididata(smf[0]);
+      }
     } else if (current_clip_type == MusicClipType.Lyrics) {
       melodyTypeSceneChanger();
     } else {
@@ -245,6 +252,7 @@ document
     // }
   });
 
+// synthesizer 옆으로 넘기는 버튼
 document.getElementById("NextButton").addEventListener("click", function () {
   stopRecording();
   stopAllNotePlayer();
@@ -255,6 +263,12 @@ document.getElementById("NextButton").addEventListener("click", function () {
   } else if (current_clip_type == MusicClipType.Beat) {
     melodyTypeSceneChanger();
     clearNoteClip(MusicClipType.Melody);
+
+    if (flag == 1) {
+      current_clip_type = MusicClipType.Melody;
+      const smf = new JZZ.MIDI.SMF(storedMidiData);
+      getMididata(smf[0]);
+    }
   } else if (current_clip_type == MusicClipType.Melody) {
     lyricsTypeSceneChanger();
   }
@@ -2495,6 +2509,7 @@ function getMidiResolution(data) {
 }
 
 function fetchMidiContent() {
+  flag = 1;
   fetch("/get_midi_data")
     .then((response) => {
       if (!response.ok) {
@@ -2511,33 +2526,16 @@ function fetchMidiContent() {
 
       // getMididata 함수 호출
       getMididata(smf[0]);
+
+      // 받아온 값 저장
+      storedMidiData = data;
     })
     .catch((error) => {
       console.error("Fetch error:", error);
     });
 }
 
-// 여기
 document.getElementById("test_load").addEventListener("click", function () {
-  // fetch('/dd', { headers: { 'Accept': 'text/plain' }})
-  //     .then(response => {
-  //         if (!response.ok) {
-  //             throw new Error(`HTTP error! Status: ${response.status}`);
-  //         }
-  //         return response.text();
-  //     })
-  //     .then(midiFilePath  => {
-  //         // 여기에서 /shape 엔드포인트의 응답을 처리
-  //         window.location.href = `/data?midi_file=${encodeURIComponent(midiFilePath)}`;
-
-  //         console.log(midiFilePath);
-  //         console.log('dd')
-  //         console.log()
-  //     })
-  //     .catch(error => {
-  //         console.error('Fetch error:', error);
-  //     });
-
   // 페이지 로드 시 MIDI 파일 내용 가져오기
   fetchMidiContent();
 });
