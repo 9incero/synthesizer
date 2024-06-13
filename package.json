@@ -6,6 +6,7 @@
     "open-simplex-noise": "^2.5.0",
     "perlin": "^1.0.0",
     "simplex-noise": "^4.0.1",
+    "soundfont-player": "^0.12.0",
     "three-nebula": "^10.0.3"
   },
   "devDependencies": {

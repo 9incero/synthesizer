@@ -1025,6 +1025,7 @@ function MidiNoteAdditor(track, currentNote, previousNote, currentTime) {
   if (exclusiveArr2.length > 0) {
     //console.log("Ouput ", exclusiveArr2);
     for (let note of exclusiveArr2) {
+      //노트중지
       track.noteOff(
         0,
         note,

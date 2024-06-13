@@ -8,6 +8,8 @@ import {
   poly_note_set,
 } from "./Share.js";
 
+import Soundfont from "soundfont-player";
+
 let noteType = [
   "C",
   "C#",
@@ -99,7 +101,15 @@ let dial_bool = [false, false, false, false, false, false, false, false];
 // const plucky = new Tone.PluckSynth().toDestination();
 
 let polySynth = new Tone.PolySynth().toDestination();
+const audioContext = new (window.AudioContext || window.webkitAudioContext)(); //soundfont
 //polySynth.set({ detune: -1200 });
+let synth; // SoundFont 신시사이저
+
+Soundfont.instrument(audioContext, "acoustic_grand_piano").then(
+  (instrument) => {
+    synth = instrument;
+  }
+);
 
 // const MonoSynth = new Tone.MonoSynth({
 // 	oscillator: {
@@ -183,14 +193,16 @@ function get_msg_input(msg) {
 }
 export function piano_player(input_note, attackRelase, value = 127) {
   if (attackRelase) {
-    polySynth.triggerAttack(input_note);
+    // polySynth.triggerAttack(input_note);
+    synth.play(input_note, audioContext.currentTime, { gain: value / 127 });
     note_set.pitch = note2Pitch(input_note); //output : 0 ~ 127
     note_set.note = input_note; //output : C0 ~ B7
     note_set.value = value; //output : 0 ~ 127
     const event = new CustomEvent("noteInput", { detail: note_set });
     SyntheysizerEvents.dispatchEvent(event);
   } else {
-    polySynth.triggerRelease(input_note);
+    // polySynth.triggerRelease(input_note);
+    // synth.stop(input_note);
     note_set.pitch = note2Pitch(input_note); //output : 0 ~ 127
     note_set.note = input_note; //output : C0 ~ B7
     const event = new CustomEvent("noteRelease", { detail: note_set });
