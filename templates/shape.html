@@ -43,6 +43,8 @@
 </head>
 
 <body>
+    <script type="text/javascript" defer src="./static/src/js/dist/Synthesizer.js"></script>
+
     <div id = "username" style="display:none;">{{ username }}</div>
 
     <div id="MainContainer" >
@@ -132,8 +134,9 @@
 
     </div>    
 
+    <div class="lyrics-displayer" id="lyricsDisplay" style="display: none;">Your Lyrics Goes Here</div>
     <!-- <div class="lyrics-displayer" id="lyricsDisplay" style="margin-top: -5px; margin-left: 40px;">Your Lyrics Goes Here</div> -->
-    
+
     
      <div id ="ClipSettingController" style="display:none;">
         <button class="sheetMusicButton"id="sheetMusicMelodyButton"style="display:none;"> 새 클립 </button>
@@ -222,15 +225,23 @@
         <!-- 여기자리윗부분 -->
     <div class="fixed-clip-container">
         <div id = 'sheetMusicController'style="display:none">
-            <button class="timeShower"id="clipTimeShower" style="margin-left: 60px; font-size: 18px;">0.0</button>
-            <button class="sheetMusicButton"id="sheetMusicPlayButton" style="margin-left: 90px; font-size: 18px;"> Play </button>
-            <button class="sheetMusicButton"id="sheetMusicPauseButton" style="margin-left: 30px; font-size: 18px;"> Pause </button>
-            <button class="sheetMusicButton"id="sheetMusicDeleteButton" style="margin-left: 30px; margin-right: 40px; font-size: 18px;"> Delete Note </button>
-            <button class="sheetMusicButton"id="sheetMusicAllDeleteButton" style="margin-right: 30px; font-size: 18px;"> Delete All </button>
-            <button class="sheetMusicButton"id="sheetMusicLoadButton" style="margin-right: 30px; font-size: 18px;"> Import Clip </button>
+            <button class="timeShower"id="clipTimeShower" style="margin-left: 20px; font-size: 18px;">0.0</button>
+            <button class="sheetMusicButton"id="sheetMusicPlayButton" style="margin-left: 20px; font-size: 18px;"> Play </button>
+            <button class="sheetMusicButton"id="sheetMusicPauseButton" style="margin-left: 20px; font-size: 18px;"> Pause </button>
+            <button class="sheetMusicButton"id="sheetMusicDeleteButton" style="margin-left: 20px; margin-right: 20px; font-size: 18px;"> Delete Note </button>
+            <button class="sheetMusicButton"id="sheetMusicAllDeleteButton" style="margin-right: 20px; font-size: 18px;"> Delete All </button>
+            <button class="sheetMusicButton"id="sheetMusicLoadButton" style="margin-right: 20px; font-size: 18px;"> Import Clip </button>
             <!-- test -->
-            <button class="sheetMusicButton"id="test_load" style="margin-right: 30px; font-size: 18px;"> load </button>
-
+            <button class="sheetMusicButton"id="test_load" style="margin-right: 20px; font-size: 18px;"> load </button>
+            
+            <select class="sheetMusicButton" id="instrumentOption" style="font-size: 18px;" name="instrumentOption" required>
+                <option value="" disabled selected>악기선택</option>
+                <option value="accordion">accordion</option>
+                <option value="acoustic_bass">acoustic bass</option>
+                <option value="acoustic_grand_piano">acoustic grand piano</option>
+                <option value="acoustic_guitar_nylon">acoustic guitar nylon</option>
+            </select>            
+            
             <div id="slider" style="width: 1730px; height: 20px; margin-left: 48px; margin-top: 10px; left:30px; font-size: 18px;"></div>
         </div>
         <div class="grid-container" id="MelodyContainer" style="display:none">
@@ -301,7 +312,7 @@
             <div id="slider" style="width: 1730px; height: 20px; margin-left: 48px; margin-top: 10px; left:30px; font-size: 18px;"></div>
         </div>
 
-        <div class="grid-container" id="ThemaContainer">
+        <div class="grid-container" id="ThemaContainer" style="display: none;">
             <button class="MoodLoadButton" id="MoodLoadButtonMood" style="margin-right: 30px; font-size: 22px;"> Import Mood </button>
             <div class="moodCustomMenu">
                 <!-- <h4>색상 메뉴</h4> -->
@@ -559,7 +570,7 @@
     <script type="text/javascript" defer src="./static/src/js/dist/colorpicker.js"></script>
 
     <script type="text/javascript" defer src="./static/src/js/dist/JZZ.js"></script>
-    <script type="text/javascript" defer src="./static/src/js/dist/Synthesizer.js"></script>
+    <!-- <script type="text/javascript" defer src="./static/src/js/dist/Synthesizer.js"></script> -->
     <script type="text/javascript" defer src="./static/src/js/dist/SheetMusic.js"></script>
     <script type="text/javascript" defer src="./static/src/js/dist/haptic.js"></script>
     <script type="text/javascript" defer src="./static/src/js/dist/ui.js"></script>

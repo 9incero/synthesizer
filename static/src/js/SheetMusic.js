@@ -221,6 +221,8 @@ let storedMidiData = {};
 //   document.getElementById("sizeSaveButton").click();
 //   document.getElementById("velocitySaveButton").click();
 // }
+
+// 편법...
 window.onload = function () {
   current_clip_type = MusicClipType.Beat;
 
@@ -1341,19 +1343,28 @@ function px_to_time_Scale(
 /*Note Sound Maker*/
 function musicPlayer(currentTime) {
   //음, 비트 소리를 재생하는 코드
-  if (
-    current_clip_type == MusicClipType.Melody ||
-    current_clip_type == MusicClipType.Lyrics
-  ) {
-    let currentNote = melody_clip.getcurrentNoteSet(currentTime);
-    notePlayer(currentNote, previousNote);
-    previousNote = melody_clip.getcurrentNoteSet(currentTime);
-  } else if (current_clip_type == MusicClipType.Beat) {
-    let currentBeat = beat_clip.getcurrentNoteSet(currentTime);
-    for (let beat of currentBeat) {
-      beat_player(beat);
-      setTimeout(() => beat_output_play(beat), 100);
-    }
+  // if (
+  //   current_clip_type == MusicClipType.Melody ||
+  //   current_clip_type == MusicClipType.Lyrics
+  // ) {
+  //   let currentNote = melody_clip.getcurrentNoteSet(currentTime);
+  //   notePlayer(currentNote, previousNote);
+  //   previousNote = melody_clip.getcurrentNoteSet(currentTime);
+
+  // } else if (current_clip_type == MusicClipType.Beat) {
+  //   let currentBeat = beat_clip.getcurrentNoteSet(currentTime);
+  //   for (let beat of currentBeat) {
+  //     beat_player(beat);
+  //     setTimeout(() => beat_output_play(beat), 100);
+  //   }
+  // }
+  let currentNote = melody_clip.getcurrentNoteSet(currentTime);
+  notePlayer(currentNote, previousNote);
+  previousNote = melody_clip.getcurrentNoteSet(currentTime);
+  let currentBeat = beat_clip.getcurrentNoteSet(currentTime);
+  for (let beat of currentBeat) {
+    beat_player(beat);
+    setTimeout(() => beat_output_play(beat), 100);
   }
 }
 function notePlayer(currentNote, previousNote) {

@@ -105,6 +105,21 @@ const audioContext = new (window.AudioContext || window.webkitAudioContext)(); /
 //polySynth.set({ detune: -1200 });
 let synth; // SoundFont 신시사이저
 
+// 옵션선택
+document.addEventListener("DOMContentLoaded", function () {
+  var instrumentSelect = document.getElementById("instrumentOption");
+  instrumentSelect.addEventListener("change", function () {
+    instrument_select(this.value);
+  });
+});
+
+function instrument_select(value) {
+  console.log(value);
+  Soundfont.instrument(audioContext, value).then((instrument) => {
+    synth = instrument;
+  });
+}
+
 Soundfont.instrument(audioContext, "acoustic_grand_piano").then(
   (instrument) => {
     synth = instrument;
