@@ -109,118 +109,123 @@ let flag = 0;
 let storedMidiData = {};
 //---------------------------무드 데이터 수집용-------------------------//
 
-const MoodList = ["blur", "cloud", "fog", "halo", "cells", "none"];
-const MoodId = [
-  "thema_blur",
-  "thema_clouds",
-  "thema_fog",
-  "thema_halo",
-  "thema_cells",
-  "thema_none",
-];
+// const MoodList = ["blur", "cloud", "fog", "halo", "cells", "none"];
+// const MoodId = [
+//   "thema_blur",
+//   "thema_clouds",
+//   "thema_fog",
+//   "thema_halo",
+//   "thema_cells",
+//   "thema_none",
+// ];
 
-let currentMoodName = MoodList[0];
-let backgroundColor = document.getElementById("backgroundColorID").value;
-let objectColor = document.getElementById("objectColor1ID").value;
-let speedFeature = document.getElementById("speedID").value;
-let zoomFeature = document.getElementById("zoomID").value;
-let sizeFeature = document.getElementById("sizeID").value;
-let velocityFeature = document.getElementById("velocityID").value;
+// let currentMoodName = MoodList[0];
+// let backgroundColor = document.getElementById("backgroundColorID").value;
+// let objectColor = document.getElementById("objectColor1ID").value;
+// let speedFeature = document.getElementById("speedID").value;
+// let zoomFeature = document.getElementById("zoomID").value;
+// let sizeFeature = document.getElementById("sizeID").value;
+// let velocityFeature = document.getElementById("velocityID").value;
 
-document.getElementById(MoodId[0]).addEventListener("click", function () {
-  currentMoodName = MoodList[0];
-});
-document.getElementById(MoodId[1]).addEventListener("click", function () {
-  currentMoodName = MoodList[1];
-});
-document.getElementById(MoodId[2]).addEventListener("click", function () {
-  currentMoodName = MoodList[2];
-});
-document.getElementById(MoodId[3]).addEventListener("click", function () {
-  currentMoodName = MoodList[3];
-});
-document.getElementById(MoodId[4]).addEventListener("click", function () {
-  currentMoodName = MoodList[4];
-});
-document.getElementById(MoodId[5]).addEventListener("click", function () {
-  currentMoodName = MoodList[5];
-});
+// document.getElementById(MoodId[0]).addEventListener("click", function () {
+//   currentMoodName = MoodList[0];
+// });
+// document.getElementById(MoodId[1]).addEventListener("click", function () {
+//   currentMoodName = MoodList[1];
+// });
+// document.getElementById(MoodId[2]).addEventListener("click", function () {
+//   currentMoodName = MoodList[2];
+// });
+// document.getElementById(MoodId[3]).addEventListener("click", function () {
+//   currentMoodName = MoodList[3];
+// });
+// document.getElementById(MoodId[4]).addEventListener("click", function () {
+//   currentMoodName = MoodList[4];
+// });
+// document.getElementById(MoodId[5]).addEventListener("click", function () {
+//   currentMoodName = MoodList[5];
+// });
 
-// 색상 저장 버튼
-document
-  .getElementById("backgroundColorSaveButton")
-  .addEventListener("click", function () {
-    backgroundColor = document.getElementById("backgroundColorID").value;
-  });
-document
-  .getElementById("objectColor1SaveButton")
-  .addEventListener("click", function () {
-    objectColor = document.getElementById("objectColor1ID").value;
-  });
+// // 색상 저장 버튼
+// document
+//   .getElementById("backgroundColorSaveButton")
+//   .addEventListener("click", function () {
+//     backgroundColor = document.getElementById("backgroundColorID").value;
+//   });
+// document
+//   .getElementById("objectColor1SaveButton")
+//   .addEventListener("click", function () {
+//     objectColor = document.getElementById("objectColor1ID").value;
+//   });
 
-// 추가 요소 저장 버튼
-document
-  .getElementById("speedSaveButton")
-  .addEventListener("click", function () {
-    speedFeature = document.getElementById("speedID").value;
-  });
-document
-  .getElementById("zoomSaveButton")
-  .addEventListener("click", function () {
-    zoomFeature = document.getElementById("zoomID").value;
-  });
-document
-  .getElementById("sizeSaveButton")
-  .addEventListener("click", function () {
-    sizeFeature = document.getElementById("sizeID").value;
-  });
-document
-  .getElementById("velocitySaveButton")
-  .addEventListener("click", function () {
-    velocityFeature = document.getElementById("velocityID").value;
-  });
+// // 추가 요소 저장 버튼
+// document
+//   .getElementById("speedSaveButton")
+//   .addEventListener("click", function () {
+//     speedFeature = document.getElementById("speedID").value;
+//   });
+// document
+//   .getElementById("zoomSaveButton")
+//   .addEventListener("click", function () {
+//     zoomFeature = document.getElementById("zoomID").value;
+//   });
+// document
+//   .getElementById("sizeSaveButton")
+//   .addEventListener("click", function () {
+//     sizeFeature = document.getElementById("sizeID").value;
+//   });
+// document
+//   .getElementById("velocitySaveButton")
+//   .addEventListener("click", function () {
+//     velocityFeature = document.getElementById("velocityID").value;
+//   });
 
-function saveMood() {
-  let MoodDataObject = {
-    MoodName: currentMoodName,
-    backgroundColor: backgroundColor,
-    objectColor: objectColor,
-    speedFeature: speedFeature,
-    zoomFeature: zoomFeature,
-    sizeFeature: sizeFeature,
-    velocityFeature: velocityFeature,
-  };
-  console.log("MoodDataSave");
-  console.log(MoodDataObject);
-  downloadJsonFile(userName + "_Moodlog", MoodDataObject);
-}
-function loadMood(jsonObject) {
-  let MoodName = jsonObject["MoodName"];
-  let backgroundColor = jsonObject["backgroundColor"];
-  let objectColor = jsonObject["objectColor"];
-  let speedFeature = jsonObject["speedFeature"];
-  let zoomFeature = jsonObject["zoomFeature"];
-  let sizeFeature = jsonObject["sizeFeature"];
-  let velocityFeature = jsonObject["velocityFeature"];
+// function saveMood() {
+//   let MoodDataObject = {
+//     MoodName: currentMoodName,
+//     backgroundColor: backgroundColor,
+//     objectColor: objectColor,
+//     speedFeature: speedFeature,
+//     zoomFeature: zoomFeature,
+//     sizeFeature: sizeFeature,
+//     velocityFeature: velocityFeature,
+//   };
+//   console.log("MoodDataSave");
+//   console.log(MoodDataObject);
+//   downloadJsonFile(userName + "_Moodlog", MoodDataObject);
+// }
+// function loadMood(jsonObject) {
+//   let MoodName = jsonObject["MoodName"];
+//   let backgroundColor = jsonObject["backgroundColor"];
+//   let objectColor = jsonObject["objectColor"];
+//   let speedFeature = jsonObject["speedFeature"];
+//   let zoomFeature = jsonObject["zoomFeature"];
+//   let sizeFeature = jsonObject["sizeFeature"];
+//   let velocityFeature = jsonObject["velocityFeature"];
 
-  document.getElementById(MoodId[MoodList.indexOf(MoodName)]).click();
+//   document.getElementById(MoodId[MoodList.indexOf(MoodName)]).click();
 
-  document.getElementsByClassName("clr-field")[0].style.color = backgroundColor;
-  document.getElementById("backgroundColorSaveButton").click();
+//   document.getElementsByClassName("clr-field")[0].style.color = backgroundColor;
+//   document.getElementById("backgroundColorSaveButton").click();
 
-  document.getElementsByClassName("clr-field")[1].style.color = objectColor;
-  document.getElementById("objectColor1SaveButton").click();
+//   document.getElementsByClassName("clr-field")[1].style.color = objectColor;
+//   document.getElementById("objectColor1SaveButton").click();
 
-  document.getElementById("speedID").value = speedFeature;
-  document.getElementById("zoomID").value = zoomFeature;
-  document.getElementById("sizeID").value = sizeFeature;
-  document.getElementById("velocityID").value = velocityFeature;
+//   document.getElementById("speedID").value = speedFeature;
+//   document.getElementById("zoomID").value = zoomFeature;
+//   document.getElementById("sizeID").value = sizeFeature;
+//   document.getElementById("velocityID").value = velocityFeature;
 
-  document.getElementById("speedSaveButton").click();
-  document.getElementById("zoomSaveButton").click();
-  document.getElementById("sizeSaveButton").click();
-  document.getElementById("velocitySaveButton").click();
-}
+//   document.getElementById("speedSaveButton").click();
+//   document.getElementById("zoomSaveButton").click();
+//   document.getElementById("sizeSaveButton").click();
+//   document.getElementById("velocitySaveButton").click();
+// }
+window.onload = function () {
+  current_clip_type = MusicClipType.Beat;
+
+  document.getElementById("NextButton").click();
+};
 
 document
   .getElementById("PreviousButton")
@@ -229,6 +234,7 @@ document
     stopRecording();
     stopAllNotePlayer();
     play_state = false;
+
     if (current_clip_type == MusicClipType.Mood) {
       console.log("to Login");
       document.getElementById("loginPage").click();
@@ -257,6 +263,7 @@ document.getElementById("NextButton").addEventListener("click", function () {
   stopRecording();
   stopAllNotePlayer();
   play_state = false;
+  console.log(MusicClipType);
   if (current_clip_type == MusicClipType.Mood) {
     beatTypeSceneChanger();
     clearNoteClip(MusicClipType.Beat);
@@ -310,10 +317,11 @@ function melodyTypeSceneChanger() {
   noteClickIndex = -1;
   console.log("to Melody", current_clip_type);
   document.getElementById("moodContainer").style.display = "none";
+  document.getElementById("timeLine3").style.display = "none";
   document.getElementById("sheetMusicController").style.display = "block";
   document.getElementById("trackContainer").style.display = "block";
   document.getElementById("ThemaContainer").style.display = "none";
-  document.getElementById("BeatContainer").style.display = "none";
+  document.getElementById("BeatContainer").style.display = "block";
   document.getElementById("MelodyContainer").style.display = "block";
   document.getElementById("TemplateContainer").style.display = "none";
 
@@ -340,13 +348,12 @@ function lyricsTypeSceneChanger() {
   document.getElementById("lyricsVideoContainer").style.display = "block";
   document.getElementById("Melody-VerticalGrid").style.display = "none";
 
-  document.getElementById("trackText").style.display = "block";
-  document.getElementById("timeLine3").style.display = "block";
+  document.getElementById("timeLine1").style.display = "block";
   document.getElementById("trackMusicDeleteButton").disabled = false;
   document.getElementById("trackClipCreateButton").disabled = false;
   document.getElementById("TrackContainer").style.display = "block";
-  document.getElementById("clipEditContainer").style.display = "block";
-  document.getElementById("videoCheckContainer2").style.display = "none";
+  document.getElementById("clipEditContainer").style.display = "none";
+  // document.getElementById("videoCheckContainer2").style.display = "none";
 
   //videoCheckCanvas = document.getElementById("videoCheckCanvas");
   videoCheckContainerBox = document.getElementById("videoCheckContainer");
@@ -2736,8 +2743,10 @@ function getMididata(midiData) {
       if (MidiTextLine != null) {
         if (current_clip_type == MusicClipType.Melody) {
           setMidiToMelodyClip(MidiTextLine);
+          setMidiToBeatClip(MidiTextLine);
         } else if (current_clip_type == MusicClipType.Beat) {
           setMidiToBeatClip(MidiTextLine);
+          setMidiToMelodyClip(MidiTextLine);
         }
       }
     }
@@ -2745,9 +2754,12 @@ function getMididata(midiData) {
   if (current_clip_type == MusicClipType.Melody) {
     clipDurationNormalize(MusicClipType.Melody);
     loadClip(melody_clip, melody_clip.getDuration());
+    clipDurationNormalize(MusicClipType.Beat);
+    loadClip(beat_clip, beat_clip.getDuration());
   } else if (current_clip_type == MusicClipType.Beat) {
     clipDurationNormalize(MusicClipType.Beat);
     loadClip(beat_clip, beat_clip.getDuration());
+    loadClip(melody_clip, melody_clip.getDuration());
   }
   if (OverMidiDataChecker) {
     alert("범위에서 벗어난 MIDI 정보가 있습니다. 일부는 적용이 안됩니다.");

@@ -407,7 +407,12 @@ div#videolyricpair {
   border-radius: 3px;
 }
 
+#pagebtn {
+  text-align: right;
+}
+
 #PreviousButton {
+  display: inline-block;
   background-color: #d3d3d3;
   color: black;
   padding: 20px 50px;
@@ -417,9 +422,12 @@ div#videolyricpair {
   font-size: 50px;
   border-radius: 4px;
   margin-bottom: 10px;
+  z-index: 10000000;
 }
 
 #NextButton {
+  display: inline-block;
+
   background-color: #04aa6d;
   color: white;
   padding: 20px 50px;
@@ -429,6 +437,7 @@ div#videolyricpair {
   font-size: 50px;
   border-radius: 4px;
   margin-bottom: 10px;
+  z-index: 10000000;
 }
 
 #sheetMusicSaveButton {

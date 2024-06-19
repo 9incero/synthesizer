@@ -1,188 +1,267 @@
-html, body {
-	height: 100%;
-    overflow: hidden;
-    font-family: 'Apple SD Gothic Neo';
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Apple SD Gothic Neo";
 }
 
-#shape-canvas > canvas{
-    margin-left: 40px;
-    margin-bottom: -20px;
+#shape-canvas > canvas {
+  margin-left: 40px;
+  margin-bottom: -20px;
 }
 
-
-
-#slider > span{
-    margin-top: 1px;
-    width: 30px;
-    height: 23px;
-    background: linear-gradient(144deg,hsl(0, 0%, 95%), #808080 50%,#5d5454);
+#slider > span {
+  margin-top: 1px;
+  width: 30px;
+  height: 23px;
+  background: linear-gradient(144deg, hsl(0, 0%, 95%), #808080 50%, #5d5454);
 }
 
-
-
-
-
-div#content{
-    margin-top: 20px;
-    position: absolute;
+div#content {
+  margin-top: 20px;
+  position: absolute;
 }
 
-
-canvas#granim-canvas{
-    width: 800px;
-    height: 600px;
-    order: 2
+canvas#granim-canvas {
+  width: 800px;
+  height: 600px;
+  order: 2;
 }
 
-p#identityVisual{
-    display: none;
+p#identityVisual {
+  display: none;
 }
 
-
-div.shapeEffectClass{
-    margin-top: -550px;
-    width: 5rem;
-    height: 30rem;
-    background-color: grey;
-    margin-right: 30px;
-    float: right;
+div.shapeEffectClass {
+  margin-top: -550px;
+  width: 5rem;
+  height: 30rem;
+  background-color: grey;
+  margin-right: 30px;
+  float: right;
 }
 
-
-button.effectButtonClass{
-    width: 5rem;
-    height: 3.05rem;
-    margin-bottom: 2.4rem;
-    border: none;
-    background-color: whitesmoke;
+button.effectButtonClass {
+  width: 5rem;
+  height: 3.05rem;
+  margin-bottom: 2.4rem;
+  border: none;
+  background-color: whitesmoke;
 }
 
-
-div.customMenu{
-    margin-top: -550px;
-    margin-right: 110px;
-    float: right;
-    width: 30rem;
-    height: 30rem;
-    border: 3px solid black;
-    background-color: gainsboro;
+div.customMenu {
+  margin-top: -550px;
+  margin-right: 110px;
+  float: right;
+  width: 30rem;
+  height: 30rem;
+  border: 3px solid black;
+  background-color: gainsboro;
 }
 
-button.shapeButtonClass{
-    width: 12rem;
-    height: 2rem;
+button.shapeButtonClass {
+  width: 12rem;
+  height: 2rem;
 }
 
-button.shapeButtonClass_2D{
-    width: 10rem;
-    height: 2rem;
+button.shapeButtonClass_2D {
+  width: 10rem;
+  height: 2rem;
 }
 
-button.shapeButtonClass_3D{
-    width: 10rem;
-    height: 2rem;
+button.shapeButtonClass_3D {
+  width: 10rem;
+  height: 2rem;
 }
 
-
-button#backgroundColorSaveButton{
-    visibility: visible;
-    background-color: aliceblue;
-    color: #1e6b7b;
-    width: 80px;
-    height: 80px;
-    border: none;
-    box-shadow: 
-    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+button#backgroundColorSaveButton {
+  visibility: visible;
+  background-color: aliceblue;
+  color: #1e6b7b;
+  width: 80px;
+  height: 80px;
+  border: none;
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
-    border-radius: 50px;
-    margin-bottom: 30px;
+  border-radius: 50px;
+  margin-bottom: 30px;
 }
-button#objectColor1SaveButton{
-    visibility: visible;
-    background-color: aliceblue;
-    color: #1e6b7b;
-    width: 80px;
-    height: 80px;
-    border: none;
-    box-shadow: 
-    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+button#objectColor1SaveButton {
+  visibility: visible;
+  background-color: aliceblue;
+  color: #1e6b7b;
+  width: 80px;
+  height: 80px;
+  border: none;
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
-    border-radius: 50px;
-
+  border-radius: 50px;
 }
-
-
 
 /* div#shapeMenu-Scale{
 
 } */
 
-div#shapeMenu-Blink{
-    display: none;
+div#shapeMenu-Blink {
+  display: none;
 }
 
-div#shapeMenu-Line{
-    display: none;
+div#shapeMenu-Line {
+  display: none;
 }
 
-div#shapeMenu-Bloom{
-    display: none;
+div#shapeMenu-Bloom {
+  display: none;
 }
 
-div#shapeMenu-Gradient{
-    display: none;
+div#shapeMenu-Gradient {
+  display: none;
 }
 
-div#shapeMenu-Horizontal{
-    display: none;
+div#shapeMenu-Horizontal {
+  display: none;
 }
 
-
-
-button#effectScale{
-    border: 3px solid black;
+button#effectScale {
+  border: 3px solid black;
 }
 
+div.saveTemplate {
+  float: right;
+  margin-top: 280px;
 
-
-div.saveTemplate{
-    float: right;
-    margin-top: 280px;
-
-    background-color: gray;
-    width: 35em;
-    height: 10rem;
-
+  background-color: gray;
+  width: 35em;
+  height: 10rem;
 }
-
-
 
 .usage-cont {
-    width: 340px;
-    padding: 15px;
-    background: white;
-    position: absolute;
-    right: 30px;
-    top: 30px;
-    border-radius: 5px;
-    color: #2b2928;
-    text-align: left;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
-    z-index: 100 !important;
+  width: 340px;
+  padding: 15px;
+  background: white;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  border-radius: 5px;
+  color: #2b2928;
+  text-align: left;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  /* z-index: 100 !important; */
 }
 
-
-
-.visualButtons{
-    float: right;
+.visualButtons {
+  float: right;
 }
 
-
-#customSliders{
-    display: none;
-    float: right;
-    /* position: absolute; */
-    /* margin-top: 50px; */
-    margin-top: 50px;
+#customSliders {
+  display: none;
+  float: right;
+  /* position: absolute; */
+  /* margin-top: 50px; */
+  margin-top: 50px;
 }
 
+/* chatbot css */
+.chat-card {
+  background-color: #fff;
+  height: 1280px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.chat-header {
+  padding: 10px;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+}
+
+.chat-header .h2 {
+  font-size: 50px;
+  color: #333;
+}
+
+.chat-body {
+  padding: 20px;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.incoming {
+  background-color: #e1e1e1;
+}
+
+.outgoing {
+  background-color: #f2f2f2;
+  text-align: right;
+}
+
+.message p {
+  font-size: 40px;
+  color: #333;
+  margin: 0;
+}
+
+.chat-footer {
+  padding: 10px;
+  background-color: #f2f2f2;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 99%;
+}
+
+.chat-footer input[type="text"] {
+  flex-grow: 1;
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  font-size: 40px;
+}
+
+.chat-footer button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #4285f4;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 40px;
+}
+
+.chat-footer button:hover {
+  background-color: #0f9d58;
+}
+
+@keyframes chatAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-card .message {
+  animation: chatAnimation 0.3s ease-in-out;
+  animation-fill-mode: both;
+  animation-delay: 0.1s;
+}
+
+.chat-card .message:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+.chat-card .message:nth-child(odd) {
+  animation-delay: 0.3s;
+}
