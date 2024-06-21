@@ -242,16 +242,25 @@ document
       document.getElementById("loginPage").click();
     } else if (current_clip_type == MusicClipType.Beat) {
       moodTypeSceneChanger();
+      console.log("beattt!!");
     } else if (current_clip_type == MusicClipType.Melody) {
-      beatTypeSceneChanger();
+      melodyTypeSceneChanger();
       clearNoteClip(MusicClipType.Beat);
       if (flag == 1) {
         current_clip_type = MusicClipType.Beat;
         const smf = new JZZ.MIDI.SMF(storedMidiData);
         getMididata(smf[0]);
       }
+      console.log("melodyyy");
     } else if (current_clip_type == MusicClipType.Lyrics) {
-      melodyTypeSceneChanger();
+      melody2beatTypeSceneChanger();
+      clearNoteClip(MusicClipType.Melody);
+      console.log("gma");
+      if (flag == 1) {
+        current_clip_type = MusicClipType.Melody;
+        const smf = new JZZ.MIDI.SMF(storedMidiData);
+        getMididata(smf[0]);
+      }
     } else {
       lyricsTypeSceneChanger();
     }
@@ -267,12 +276,12 @@ document.getElementById("NextButton").addEventListener("click", function () {
   play_state = false;
   console.log(MusicClipType);
   if (current_clip_type == MusicClipType.Mood) {
-    beatTypeSceneChanger();
-    clearNoteClip(MusicClipType.Beat);
+    // beatTypeSceneChanger();
+    // clearNoteClip(MusicClipType.Beat);
   } else if (current_clip_type == MusicClipType.Beat) {
-    melodyTypeSceneChanger();
+    melody2beatTypeSceneChanger();
     clearNoteClip(MusicClipType.Melody);
-
+    console.log("gma");
     if (flag == 1) {
       current_clip_type = MusicClipType.Melody;
       const smf = new JZZ.MIDI.SMF(storedMidiData);
@@ -285,8 +294,8 @@ document.getElementById("NextButton").addEventListener("click", function () {
   //   templateTypeSceneChanger();
   // }
   else {
-    totalTypeSceneChanger();
-    document.getElementById("sheetMusicSaveButton").click();
+    // totalTypeSceneChanger();
+    // document.getElementById("sheetMusicSaveButton").click();
   }
 });
 function moodTypeSceneChanger() {
@@ -333,10 +342,34 @@ function melodyTypeSceneChanger() {
   document.getElementById("Melody-VerticalGrid").style.display = "block";
   initializeTimer();
 }
+
+function melody2beatTypeSceneChanger() {
+  current_clip_type = MusicClipType.Melody;
+  noteClickIndex = -1;
+  console.log("to Melody", current_clip_type);
+  document.getElementById("clipEditContainer").style.display = "block";
+  document.getElementById("clipEditContainer2").style.display = "block";
+  document.getElementById("moodContainer").style.display = "none";
+  document.getElementById("timeLine3").style.display = "none";
+  document.getElementById("sheetMusicController").style.display = "block";
+  document.getElementById("trackContainer").style.display = "block";
+  document.getElementById("ThemaContainer").style.display = "none";
+  document.getElementById("BeatContainer").style.display = "block";
+  document.getElementById("MelodyContainer").style.display = "block";
+  document.getElementById("TemplateContainer").style.display = "none";
+
+  document.getElementById("noteBoxContainer").style.display = "block";
+  document.getElementById("timeLineContainer").style.display = "block";
+  document.getElementById("lyricsVideoContainer").style.display = "none";
+  document.getElementById("Melody-VerticalGrid").style.display = "block";
+  initializeTimer();
+}
 function lyricsTypeSceneChanger() {
   current_clip_type = MusicClipType.Lyrics;
   noteClickIndex = -1;
   console.log("to Lyrics", current_clip_type);
+  document.getElementById("clipEditContainer").style.display = "block";
+  document.getElementById("clipEditContainer2").style.display = "block";
   document.getElementById("moodContainer").style.display = "none";
   document.getElementById("sheetMusicController").style.display = "block";
   document.getElementById("trackContainer").style.display = "block";
@@ -1777,7 +1810,7 @@ SyntheysizerEvents.addEventListener("pianoKeyOutput", function (e) {
 SyntheysizerEvents.addEventListener("padkeyInput", function (e) {
   doubleChecker += 1;
   if (doubleChecker % 2 == 0) {
-    if (play_state && current_clip_type == MusicClipType.Beat) {
+    if (play_state && current_clip_type == MusicClipType.Melody) {
       beat_clip.setBeatInput(e.detail.id, currentTime);
       console.log("Pad Input");
       let PadItem = createResizeDragElement(
