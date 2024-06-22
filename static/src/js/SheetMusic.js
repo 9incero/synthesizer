@@ -281,7 +281,6 @@ document.getElementById("NextButton").addEventListener("click", function () {
   } else if (current_clip_type == MusicClipType.Beat) {
     melody2beatTypeSceneChanger();
     clearNoteClip(MusicClipType.Melody);
-    console.log("gma");
     if (flag == 1) {
       current_clip_type = MusicClipType.Melody;
       const smf = new JZZ.MIDI.SMF(storedMidiData);
