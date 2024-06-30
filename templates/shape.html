@@ -81,17 +81,17 @@
     <div id="SynthContainer" style="display: inline-block;">
     <div id="DeviceConnectorContainer">
         <div id="midisoundDIV">
-            <button data-action = "open_midi_in" class="synthesizer" id="synthConnector" style="margin-left: 10px; font-size: 18px;">Connect Synthesizer</button> 
+            <button data-action = "open_midi_in" class="synthesizer" id="synthConnector" style="margin-left: 10px; font-size: 18px;">신디사이저 연결</button> 
             <button data-action = "close_midi_in" class="synthesizer" style="display: none;">미디 해제</button> 
             <span id="midiInName" style="display: none;">NONE</span>
-            <button data-action = "SearchHapticDevice" class="haptic" style="margin-left: 10px; margin-top: 10px; font-size: 18px;">Connect Haptic Device</button> 
+            <button data-action = "SearchHapticDevice" class="haptic" style="margin-left: 10px; margin-top: 10px; font-size: 18px;">햅틱기기 연결</button> 
             <button data-action = "DisconnectHapticDevice" class="haptic" style="margin-bottom: 10px; margin-right: 20px; margin-top: 10px; display: none;">햅틱 해제</button> 
 
         </div>
 
 
         <div id="hapticsoundDIV">
-            <h4 style="margin-top: -3px; margin-bottom: 10px; font-size: 20px;"> Vibration Intensity </h4>
+            <h4 style="margin-top: -3px; margin-bottom: 10px; font-size: 20px;"> 진동세기 </h4>
             <button data-action = "HapticPatternPlayButton1" id="HapticPlayButton1" style="display: none">Play1</button>
             <button data-action = "HapticPatternPlayButton2" id="HapticPlayButton2" style="display: none">Play2</button>
             <button data-action = "HapticPatternPlayButton3" id="HapticPlayButton3" style="display: none">Play3</button>
@@ -114,7 +114,7 @@
 
 
         <div id="bpmsoundDIV">
-            <h4 style="margin-top: 9px; margin-bottom: -9px; font-size: 20px;"> Tempo </h4>
+            <h4 style="margin-top: 9px; margin-bottom: -9px; font-size: 20px;"> 박자 </h4>
             <div class="button r" id="button-bpm">
                 <input type="checkbox" class="checkbox" id="BPMType"  unchecked>
                 <div class="knobs"></div>
@@ -152,11 +152,11 @@
         <input type="number" name="age" id="trackduration" min="30" max="6000" step="1" value="80" style=" display:none">
         <button class="timeShower"id="trackTimeShower" style="display:none;margin-left: 10px; font-size: 18px;">0.0</button>
             
-        <button class="trackMusicButton"id="trackMusicPlayButton" style="display:none; font-size: 20px;"> Play </button>
-        <button class="trackMusicButton"id="trackMusicPauseButton" style="display:none;font-size: 20px;"> Pause </button>
-        <button class="trackMusicButton"id="trackMusicDeleteButton" style="display:none;font-size: 20px;"> Delete </button>
-        <button class="trackMusicButton"id="trackClipCreateButton" style="display:none;font-size: 20px;"> New Clip </button>
-        <button class="trackMusicButton"id="displayUploadButton" style="display:none;font-size: 20px; display: none;"> Upload </button>
+        <button class="trackMusicButton"id="trackMusicPlayButton" style="display:none; font-size: 20px;"> 재생 </button>
+        <button class="trackMusicButton"id="trackMusicPauseButton" style="display:none;font-size: 20px;"> 멈춤 </button>
+        <button class="trackMusicButton"id="trackMusicDeleteButton" style="display:none;font-size: 20px;"> 삭제 </button>
+        <button class="trackMusicButton"id="trackClipCreateButton" style="display:none;font-size: 20px;"> 새 클립 </button>
+        <button class="trackMusicButton"id="displayUploadButton" style="display:none;font-size: 20px; display: none;"> 업로드 </button>
 
         <input type="file" id="fileUpload" multiple ='multiple' style="display:none"/>
         <div id="slider_track" style="display:none"></div>
@@ -227,13 +227,13 @@
     <div class="fixed-clip-container" id="clipEditContainer2" style="display: none;">
         <div id = 'sheetMusicController'style="display:none">
             <button class="timeShower"id="clipTimeShower" style="margin-left: 20px; font-size: 18px;">0.0</button>
-            <button class="sheetMusicButton"id="sheetMusicPlayButton" style="margin-left: 20px; font-size: 18px;"> Play </button>
-            <button class="sheetMusicButton"id="sheetMusicPauseButton" style="margin-left: 20px; font-size: 18px;"> Pause </button>
-            <button class="sheetMusicButton"id="sheetMusicDeleteButton" style="margin-left: 20px; margin-right: 20px; font-size: 18px;"> Delete Note </button>
-            <button class="sheetMusicButton"id="sheetMusicAllDeleteButton" style="margin-right: 20px; font-size: 18px;"> Delete All </button>
-            <button class="sheetMusicButton"id="sheetMusicLoadButton" style="margin-right: 20px; font-size: 18px;"> Import Clip </button>
+            <button class="sheetMusicButton"id="sheetMusicPlayButton" style="margin-left: 20px; font-size: 18px;"> 재생 </button>
+            <button class="sheetMusicButton"id="sheetMusicPauseButton" style="margin-left: 20px; font-size: 18px;"> 멈춤 </button>
+            <button class="sheetMusicButton"id="sheetMusicDeleteButton" style="margin-left: 20px; margin-right: 20px; font-size: 18px;"> 음표 삭제 </button>
+            <button class="sheetMusicButton"id="sheetMusicAllDeleteButton" style="margin-right: 20px; font-size: 18px;"> 모두 삭제 </button>
+            <button class="sheetMusicButton"id="sheetMusicLoadButton" style="margin-right: 20px; font-size: 18px;"> 클립 추가 </button>
             <!-- test -->
-            <button class="sheetMusicButton"id="test_load" style="margin-right: 20px; font-size: 18px;"> load </button>
+            <button class="sheetMusicButton"id="test_load" style="display: none;"> load </button>
             
             <select class="sheetMusicButton" id="instrumentOption" style="font-size: 18px;" name="instrumentOption" required>
                 <option value="" disabled selected>악기선택</option>
@@ -247,14 +247,14 @@
         </div>
         <div class="grid-container" id="MelodyContainer" style="display:none">
             <div id="lyricsInputContainer" style=" margin-left: 1050px; margin-top: -60px; position: absolute; ">
-               Lyrics:  <input type="text" id="lyricsInputer" size=30 style="width: 600px; height:30px" style="font-size: 17px;">
-                <button class="sheetMusicLyricsButton"id="LyricsPushButton"style="width:80px; height:35px; margin-top: -10px; margin-bottom: -70px; font-size: 18px;"> Enter </button>
+               가사:  <input type="text" id="lyricsInputer" size=30 style="width: 600px; height:30px" style="font-size: 17px;">
+                <button class="sheetMusicLyricsButton"id="LyricsPushButton"style="width:80px; height:35px; margin-top: -10px; margin-bottom: -70px; font-size: 18px;"> 입력 </button>
             </div>
             <div id = "timeLineContainer">
                 <div class="vertical-line" id="startLine", style=" margin-top:0px; left:0px; margin-left: 80px;"></div>
                 <div class="vertical-line" id="timeLine1" style="background-color:green; margin-top:0px; left:0px; margin-left: 80px; "></div> 
             </div>
-            <div class="grid-item" id="LyricsBox1" style="height:20px; font-size: 18px;">Lyrics</div>
+            <div class="grid-item" id="LyricsBox1" style="height:20px; font-size: 18px;">가사</div>
             <div id = "noteBoxContainer">
                 <div class="grid-item" id="box_B" style="background-color: rgb(255, 148, 214);">Si  </div>
                 <div class="grid-item" id="box_A#" style="background-color: rgb(255, 145, 246);">La# </div>
@@ -284,9 +284,9 @@
                     <button class="videoButton" id="recordStopButton">Save</button>
                     
                     <div id="videolyricpair">
-                        <span id="lyricsWord">Clicked Sign</span>
+                        <span id="lyricsWord">수화 추가</span>
                         -
-                        <span id="lyricsVideo">NONE</span> 
+                        <span id="lyricsVideo">없음</span> 
                         <button id="lyricsSettingButton" style="position: absolute; width:120px; height:38px; font-size: 22px; margin-left: 30px; margin-top: -10px; float: right;">Connect</button>
                     </div>
                 </div>
@@ -302,11 +302,11 @@
     <div id = "clipEditContainer" class="fixed-clip-container" style="display: none;">
         <div id = 'sheetMusicController'style="display:none">
             <button class="timeShower"id="clipTimeShower" style="margin-left: 60px; font-size: 18px;">0.0</button>
-            <button class="sheetMusicButton"id="sheetMusicPlayButton" style="margin-left: 90px; font-size: 18px;"> Play </button>
-            <button class="sheetMusicButton"id="sheetMusicPauseButton" style="margin-left: 30px; font-size: 18px;"> Pause </button>
-            <button class="sheetMusicButton"id="sheetMusicDeleteButton" style="margin-left: 30px; margin-right: 40px; font-size: 18px;"> Delete Note </button>
-            <button class="sheetMusicButton"id="sheetMusicAllDeleteButton" style="margin-right: 30px; font-size: 18px;"> Delete All </button>
-            <button class="sheetMusicButton"id="sheetMusicLoadButton" style="margin-right: 30px; font-size: 18px;"> Import Clip </button>
+            <button class="sheetMusicButton"id="sheetMusicPlayButton" style="margin-left: 90px; font-size: 18px;"> 재생 </button>
+            <button class="sheetMusicButton"id="sheetMusicPauseButton" style="margin-left: 30px; font-size: 18px;"> 멈춤 </button>
+            <button class="sheetMusicButton"id="sheetMusicDeleteButton" style="margin-left: 30px; margin-right: 40px; font-size: 18px;"> 음표 삭제 </button>
+            <button class="sheetMusicButton"id="sheetMusicAllDeleteButton" style="margin-right: 30px; font-size: 18px;"> 모두 삭제 </button>
+            <button class="sheetMusicButton"id="sheetMusicLoadButton" style="margin-right: 30px; font-size: 18px;"> 클립 추가 </button>
             <!-- test -->
             <button class="sheetMusicButton"id="test_load" style="margin-right: 30px; font-size: 18px;"> load </button>
 
@@ -335,14 +335,14 @@
 
         <div class="grid-container" id="MelodyContainer" style="display:none">
             <div id="lyricsInputContainer" style=" margin-left: 1050px; margin-top: -60px; position: absolute; ">
-               Lyrics:  <input type="text" id="lyricsInputer" size=30 style="width: 600px; height:30px" style="font-size: 17px;">
-                <button class="sheetMusicLyricsButton"id="LyricsPushButton"style="width:80px; height:35px; margin-top: -10px; margin-bottom: -70px; font-size: 18px;"> Enter </button>
+               가사:  <input type="text" id="lyricsInputer" size=30 style="width: 600px; height:30px" style="font-size: 17px;">
+                <button class="sheetMusicLyricsButton"id="LyricsPushButton"style="width:80px; height:35px; margin-top: -10px; margin-bottom: -70px; font-size: 18px;"> 입력 </button>
             </div>
             <div id = "timeLineContainer">
                 <div class="vertical-line" id="startLine", style=" margin-top:0px; left:0px; margin-left: 80px;"></div>
                 <div class="vertical-line" id="timeLine1" style="background-color:green; margin-top:0px; left:0px; margin-left: 80px; "></div> 
             </div>
-            <div class="grid-item" id="LyricsBox1" style="height:20px; font-size: 18px;">Lyrics</div>
+            <div class="grid-item" id="LyricsBox1" style="height:20px; font-size: 18px;">가사</div>
             <div id = "noteBoxContainer">
                 <div class="grid-item" id="box_B" style="background-color: rgb(255, 148, 214);">Si  </div>
                 <div class="grid-item" id="box_A#" style="background-color: rgb(255, 145, 246);">La# </div>
@@ -372,9 +372,9 @@
                     <button class="videoButton" id="recordStopButton">Save</button>
                     
                     <div id="videolyricpair">
-                        <span id="lyricsWord">Clicked Sign</span>
+                        <span id="lyricsWord">수화 추가</span>
                         -
-                        <span id="lyricsVideo">NONE</span> 
+                        <span id="lyricsVideo">없음</span> 
                         <button id="lyricsSettingButton" style="position: absolute; width:120px; height:38px; font-size: 22px; margin-left: 30px; margin-top: -10px; float: right;">Connect</button>
                     </div>
                 </div>
