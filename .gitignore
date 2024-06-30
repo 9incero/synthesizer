@@ -2,4 +2,4 @@
 apiKey.json
 .idea/
 __pycache__/
-node_modules/
+node_modules/node_modules/
